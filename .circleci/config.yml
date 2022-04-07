@@ -48,7 +48,7 @@ jobs:
             git config user.name "CircleCi"
       - run:
           name: Deploy to gh-pages branch
-          command: gh-pages --message "[ci skip]" -d dist/au
+          command: gh-pages --message "[ci skip]" -d dist/pokemondb
 
 workflows:
   version: 2
