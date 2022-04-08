@@ -20,7 +20,7 @@ const defaultProfileImg: string = "assets/user/default-user5.png";
 })
 export class TopNavComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  headerTitle: string = "PokeDatabase";
+  headerTitle: string = "Pokemon DB";
   compDest$: Subject<any> = new Subject<any>();
   logoShakeState?: any = null;
   leftNavMenuState: boolean = false;

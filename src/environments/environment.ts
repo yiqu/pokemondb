@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  appTitle: 'Pokemon'
+  appTitle: 'Pokemon DB'
 };
 
 /*

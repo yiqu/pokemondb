@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  appTitle: 'Pokemon'
+  appTitle: 'Pokemon DB'
 };
