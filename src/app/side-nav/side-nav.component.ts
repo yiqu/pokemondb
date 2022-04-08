@@ -28,9 +28,9 @@ export class SideNavComponent implements OnInit, OnDestroy {
   createAllOptions() {
     this.headerList.push(
       new NavHeaderList(new NavHeader("Explorer"), [
-        new NavHeaderLink("All", "grid_view", ["/", "all"]),
-        new NavHeaderLink("By Generation", "grid_view", ["/", "generation"]),
-        new NavHeaderLink("By Region", "grid_view", ["/", "region"]),
+        new NavHeaderLink("All", "catching_pokemon", ["/", "all"]),
+        new NavHeaderLink("By Generation", "yard", ["/", "generation"]),
+        new NavHeaderLink("By Region", "window", ["/", "region"]),
       ]),
       new NavHeaderList(new NavHeader("Help & Settings"), [
         new NavHeaderLink("My Account", "account_circle", ["/", "my-account"]),
