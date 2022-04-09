@@ -9,7 +9,15 @@
 @import "@fontsource/roboto/500.css";
 @import "@fontsource/roboto/700.css";
 @import "@fontsource/roboto/100.css";
+@import "@fontsource/poppins/300.css";
+@import "@fontsource/poppins/400.css";
+@import "@fontsource/poppins/500.css";
+@import "@fontsource/poppins/700.css";
+@import "@fontsource/poppins/100.css";
+@import "@fontsource/comfortaa/400.css";
+@import "@fontsource/comfortaa/300.css";
 @import "@fontsource/quicksand/300.css";
+@import "@fontsource/quicksand/400.css";
 @import "@fontsource/quicksand/500.css";
 @import "@fontsource/quicksand/700.css";
 @import "~ng-zorro-antd/ng-zorro-antd.min.css";
@@ -28,16 +36,16 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-.font1 {
+.quicksand {
   font-family: 'Quicksand', sans-serif;
 }
 
-.font2 {
-  font-family: 'Quicksand', sans-serif;
+.poppins {
+  font-family: 'Poppins', sans-serif;
 }
 
-.font3 {
-  font-family: 'Quicksand', sans-serif;
+.comfortaa {
+  font-family: 'Comfortaa', sans-serif;
 }
 
 a {
@@ -77,8 +85,16 @@ hr {
   width: 100%;
 }
 
-.f-w-700 {
+.fw-700 {
   font-weight: 700;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.fw-400 {
+  font-weight: 400;
 }
 
 .f-right {
@@ -208,7 +224,7 @@ mat-sidenav {
 }
 
 .title-bar-bg {
-  background-color: #09255b;
+  background-color: #2a2961;
   color: #fff;
 }
 

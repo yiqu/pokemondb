@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedBudleModule } from './shared/shared.module';
 import { SideNavModule } from './side-nav/side-nav.module';
 import { TopNavModule } from './top-nav/top-nav.module';
@@ -23,10 +23,19 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { ROUTER_STATE } from './store/router/router.state';
+import { MAT_RIPPLE_GLOBAL_OPTIONS, RippleGlobalOptions } from '@angular/material/core';
 
 
 const icons: IconDefinition[] = [ AppstoreOutline, ProjectFill, ContainerFill,
   ProjectOutline, ContainerOutline ];
+
+const globalRippleConfig: RippleGlobalOptions = {
+  disabled: true,
+  animation: {
+    enterDuration: 0,
+    exitDuration: 0
+  }
+};
 
 @NgModule({
   declarations: [
@@ -36,7 +45,7 @@ const icons: IconDefinition[] = [ AppstoreOutline, ProjectFill, ContainerFill,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule,
+    NoopAnimationsModule,
     SharedBudleModule,
     SideNavModule,
     TopNavModule,
@@ -61,7 +70,12 @@ const icons: IconDefinition[] = [ AppstoreOutline, ProjectFill, ContainerFill,
       routerState: RouterState.Minimal
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_RIPPLE_GLOBAL_OPTIONS,
+      useValue: globalRippleConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

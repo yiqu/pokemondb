@@ -21,7 +21,8 @@
   font-size: 13px;
 }
 
-mat-list-item:hover {
+mat-list-item.mat-list-item:hover {
+  background-color: #dae4f1;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
 }
@@ -35,7 +36,7 @@ mat-nav-list.side-nav {
 }
 
 mat-list-item.link-active {
-  background-color: #d3d1f3;
+  background-color: #d3e0ed;
   color: #2a2961;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
@@ -48,7 +49,7 @@ mat-list-item.link-active {
 }
 
 mat-list-item.link-active:hover {
-  background-color: #d3d1f3;
+  background-color: #d3e0ed;
   color: #2a2961;
 }
 
