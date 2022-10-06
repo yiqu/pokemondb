@@ -1,4 +1,6 @@
 import { createAction, props } from "@ngrx/store";
+import { PokemonResponse, PokemonShell } from "src/app/shared/models/pokmeon.model";
+import { Pagination } from "src/app/shared/models/rest.model";
 
 const GET_ALL_POKEMON_START: string = '[Pokemon All/API] Get all pokemon start';
 const GET_ALL_POKEMON_SUCCESS: string = '[Pokemon All/API] Get all pokemon successful';
@@ -7,15 +9,15 @@ const GET_ALL_POKEMON_FAILURE: string = '[Pokemon All/API] Get all pokemon failu
 
 export const getAllPokemonStart = createAction(
   GET_ALL_POKEMON_START,
-  props<{limit: number}>()
+  props<{pagination?: Pagination}>()
 )
 
 export const getAllPokemonSuccess = createAction(
   GET_ALL_POKEMON_SUCCESS,
-  props<{mainTitle: string}>()
+  props<{payload: PokemonResponse<PokemonShell>, fetchedDate: number}>()
 )
 
 export const getAllPokemonFailure = createAction(
-  GET_ALL_POKEMON_START,
-  props<{mainTitle?: string, subTitle?: string[]}>()
+  GET_ALL_POKEMON_FAILURE,
+  props<{errMsg: string}>()
 )
