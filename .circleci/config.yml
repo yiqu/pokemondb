@@ -8,13 +8,13 @@ jobs:
       - checkout
       - restore_cache:
           key: myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}
-      - run: npm ci
+      - run: npm install
       - save_cache:
           key: myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/.npm
             - ~/.cache
-      - run: sudo npm install -g @angular/cli > /dev/null
+      - run: npm install -g @angular/cli > /dev/null
       - run: echo "Building for PROD"
       - run: |
           if [ "${CIRCLE_BRANCH}" == "master" ]; then
