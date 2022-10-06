@@ -4,7 +4,7 @@ import { Subject, timer } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
 import { MenuItem } from '../shared/models/nav-item.model';
 import { environment } from '../../environments/environment';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { createFormControl2 } from '../shared/general.utils';
 import { IsMobileService } from '../shared/services/is-mobile.service';
 import { trigger, transition, useAnimation } from '@angular/animations';
@@ -27,7 +27,7 @@ export class TopNavComponent implements OnInit, OnDestroy, AfterViewInit {
   swingState: boolean = false;
   userMenuItems: MenuItem[] = [];
   avartarImgSrc: string = defaultProfileImg;
-  actionTrackerCtrl: FormControl;
+  actionTrackerCtrl: UntypedFormControl;
 
 
   @Output()

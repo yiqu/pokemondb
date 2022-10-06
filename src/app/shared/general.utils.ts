@@ -1,15 +1,15 @@
-import { FormArray, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
+import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, ValidationErrors } from '@angular/forms';
 
-export function createFormControl(value: any, disabled: boolean, validators: any[] = [], asyncValids: any[] = []): FormControl {
-  let fc = new FormControl({
+export function createFormControl(value: any, disabled: boolean, validators: any[] = [], asyncValids: any[] = []): UntypedFormControl {
+  let fc = new UntypedFormControl({
     value: value ? value : null,
     disabled: disabled
   }, validators, asyncValids);
   return fc;
 }
 
-export function createFormControl2(value: any, disabled: boolean, validators: any[] = [], asyncValids: any[] = []): FormControl {
-  let fc = new FormControl({
+export function createFormControl2(value: any, disabled: boolean, validators: any[] = [], asyncValids: any[] = []): UntypedFormControl {
+  let fc = new UntypedFormControl({
     value: value,
     disabled: disabled
   }, validators, asyncValids);
@@ -78,11 +78,11 @@ export function arraysEqual(a1: any[], a2: any[]): boolean {
  * @param form
  * @returns
  */
-export function calculateNestedFormErrors(form: FormGroup | FormArray, removeDuplicate: boolean = true) {
+export function calculateNestedFormErrors(form: UntypedFormGroup | UntypedFormArray, removeDuplicate: boolean = true) {
   let errors: AllValidationErrors[] = [];
   Object.keys(form.controls).forEach(field => {
     const control = form.get(field);
-    if (control instanceof FormGroup || control instanceof FormArray) {
+    if (control instanceof UntypedFormGroup || control instanceof UntypedFormArray) {
       errors = errors.concat(calculateNestedFormErrors(control));
       return;
     }
