@@ -7,6 +7,7 @@ import { PokemonShellService } from '../../pokemon-shell.service';
 import * as fromPokemonShellActions from './pokemon.actions';
 import { Pagination } from 'src/app/shared/models/rest.model';
 import { PokemonResponse, PokemonShell } from 'src/app/shared/models/pokmeon.model';
+import { ScrollPosition } from './pokemon.state';
 
 @Injectable()
 export class PokemonShellEffects {
@@ -19,13 +20,23 @@ export class PokemonShellEffects {
       ofType(fromPokemonShellActions.getAllPokemonStart),
       concatLatestFrom(() => this.ps.pagination$),
       switchMap((res) => {
+        let paramsFromState: Pagination = res[1];
+        const actionPayload = res[0];
 
-        // if user submitted params, use it. Or just use the next set of calculated params
-        const inputParams = res[0];
-        console.log(inputParams?.pagination)
-        const params: Pagination = res[1];
+        let fetchUrl: string | undefined | null = undefined;
 
-        return this.ps.getPokemonShells(params).pipe(
+        // if using scroll position for auto navigating
+        if (actionPayload.scrollPosition) {
+          if (actionPayload.scrollPosition === ScrollPosition.Next) {
+            fetchUrl = paramsFromState.nextPageUrl;
+          } else if (actionPayload.scrollPosition === ScrollPosition.Prev) {
+            fetchUrl = paramsFromState.previousPageUrl;
+          }
+        }
+
+        let requestPage = actionPayload.page ?? 0;
+
+        return this.ps.getPokemonShells(requestPage, fetchUrl).pipe(
           map((payload: PokemonResponse<PokemonShell>) => {
             console.log(payload)
             return fromPokemonShellActions.getAllPokemonSuccess({ payload, fetchedDate: new Date().getTime() });

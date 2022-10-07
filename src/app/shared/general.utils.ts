@@ -152,3 +152,6 @@ export function deduplicateObjectArrayByKey<T>(arr: T[], key: string): T[] {
 }
 
 
+const getParamsFromUrl = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop as any),
+});

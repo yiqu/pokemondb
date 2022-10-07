@@ -38,7 +38,6 @@ export const inititalState = adapter.getInitialState<Partial<PokemonShellEntityS
   lastFetchedDate: undefined,
   pagination: {
     limit: ITEMS_PER_PAGE,
-    offset: 0,
     firstOffset: 0
   }
 });
@@ -47,18 +46,15 @@ export const inititalState = adapter.getInitialState<Partial<PokemonShellEntityS
 export const pokemonShellEntityReducer = createReducer(
   inititalState,
 
-  on(fromPokemonShellActions.getAllPokemonStart, (state, { pagination }) => {
-    let page = state.pagination;
-    if (pagination) {
-      page = {
-        ...state.pagination,
-        ...pagination
-      }
-    }
+  on(fromPokemonShellActions.getAllPokemonStart, (state, { page, scrollPosition }) => {
+
     return {
       ...state,
       apiWorking: true,
-      pagination: page
+      pagination: {
+        ...state.pagination,
+        pageRequested: page
+      }
     };
   }),
 

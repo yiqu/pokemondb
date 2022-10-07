@@ -1,2 +1,18 @@
-All
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+    <shared-poke-logo [logoClass]="'sm'"></shared-poke-logo>
+    <div class="p-title">
+      {{ title }}
+    </div>
+  </div>
 
+  <div>
+    Table
+  </div>
+
+  <div>
+    <button (click)="navPage(scrollPosition.Prev)">Prev</button>
+    <button (click)="navPage(scrollPosition.Next)">Next</button>
+  </div>
+
+</div>

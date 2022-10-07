@@ -8,8 +8,8 @@ export interface HParams {
 }
 
 export interface Pagination {
-  offset: number;
-  limit: number;
+  pageRequested?: number;
+  limit?: number;
   pages?: number;
   page?: number;
 
@@ -18,6 +18,9 @@ export interface Pagination {
 
   firstOffset?: number;
   lastOffset?: number;
+
+  nextPage?: number;
+  prevPage?: number;
 
   totalCount?: number; //count
   nextPageUrl?: string | null; //next
@@ -29,24 +32,31 @@ export const calculateParams = (current: Pagination, page: PokemonResponse<Pokem
   const next = page.next;
   const prev = page.previous;
 
-  const nextOffset = (current.offset + current.limit > total ? null : current.offset + current.limit);
-  const prevOffset = (current.offset - current.limit < 0 ? 0 : current.offset - current.limit);
-
   const pages = Math.ceil(total / ITEMS_PER_PAGE);
-  const currentPage = (Math.ceil(current.offset / current.limit)) + 1;
+
+  let nextOffset = current.nextOffset ?? 0;
+  if (next) {
+    const nextparams = new URL(next).searchParams;
+    nextOffset = +(nextparams.get("offset") ?? 0);
+  }
+
+  let prevOffset = current.prevOffset ?? 0;
+  if (prev) {
+    const prevparams = new URL(prev).searchParams;
+    prevOffset = +(prevparams.get("offset") ?? 0);
+  }
 
   const firstOffset = 0;
   const lastOffset = (pages * ITEMS_PER_PAGE) - ITEMS_PER_PAGE;
 
   return {
-    offset: current.offset,
+    pageRequested: current.pageRequested,
     limit: current.limit,
     nextOffset,
     prevOffset,
     firstOffset,
     lastOffset,
     pages,
-    page: currentPage,
     totalCount: total,
     nextPageUrl: next,
     previousPageUrl: prev
