@@ -30,32 +30,8 @@
     {{ title }}
   </div>
 
-  <div class="w-100" fxLayout="row" fxLayoutAlign="space-between start">
-    <div fxFlex>
-      <div class="fixed-display">
-        <div>
-          Details
-        </div>
-        <div>
-          Details
-        </div>
-        <div>
-          Details
-        </div>
-        <div>
-          Details
-        </div>
-        <div>
-          Details
-        </div>
-        <div>
-          Detailss
-        </div>
-      </div>
-    </div>
-    <div fxFlex>
-      <app-main-all-pokemon-list [list]="(this.ps.pokemonList$ | async)" (scrollLoad)="this.onScroll($event)"></app-main-all-pokemon-list>
-    </div>
+  <div class="w-100" fxLayout="row" fxLayoutAlign="start start">
+    <app-main-all-pokemon-list [list]="(this.ps.pokemonList$ | async)" (scrollLoad)="this.onScroll($event)"></app-main-all-pokemon-list>
   </div>
 </div>
 

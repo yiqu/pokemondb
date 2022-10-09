@@ -7,11 +7,17 @@
   [fromRoot]="true"
   class="poke-list">
     <ng-container *ngIf="(list && (list.length > 0)); else noItems">
-      <mat-selection-list #shoes [multiple]="false" dense>
-        <mat-list-option *ngFor="let pokemon of list" [value]="pokemon">
-          {{ pokemon.name }}
-        </mat-list-option>
-      </mat-selection-list>
+
+      <mat-nav-list dense>
+        <ng-container *ngFor="let pokemon of list">
+          <a matLine [routerLink]="['../', pokemon.name]">
+            <mat-list-item>
+              {{ pokemon.name }}
+            </mat-list-item>
+          </a>
+        </ng-container>
+      </mat-nav-list>
+
     </ng-container>
 </div>
 

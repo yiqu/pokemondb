@@ -24,6 +24,10 @@ export class AllPokemonListComponent implements OnInit {
 
   }
 
+  showInfo(pokemon: any) {
+
+  }
+
   onScrollDown() {
     this.scrollLoad.emit(ScrollPosition.Next);
   }

@@ -47,7 +47,8 @@
             "allowedCommonJsDependencies": [
               "hammerjs",
               "memo-decorator",
-              "moment"
+              "moment",
+              "deepmerge"
             ]
           },
           "configurations": {
