@@ -1,0 +1,13 @@
+<section fxLayout="row" fxLayoutAlign="space-between center" class="">
+  <div class="">
+    <ng-container *ngFor="let action of actions">
+      <button mat-button color="primary" (click)="onActionClick(action)">
+        <mat-icon>{{ action.icon }} </mat-icon>
+        <span>{{ action.display }}</span>
+      </button>
+    </ng-container>
+  </div>
+  <div>
+    <ng-content></ng-content>
+  </div>
+</section>

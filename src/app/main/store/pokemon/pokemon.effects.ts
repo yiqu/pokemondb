@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { OnInitEffects } from "@ngrx/effects";
 import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
-import { map, switchMap, iif, of, mergeMap, EMPTY, distinctUntilChanged, catchError } from 'rxjs';
+import { map, switchMap, iif, of, mergeMap, EMPTY, distinctUntilChanged, catchError, filter } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { PokemonShellService } from '../../pokemon-shell.service';
 import * as fromPokemonShellActions from './pokemon.actions';
@@ -10,7 +10,11 @@ import { PokemonResponse, PokemonShell } from 'src/app/shared/models/pokmeon.mod
 import { ScrollPosition } from './pokemon.state';
 
 @Injectable()
-export class PokemonShellEffects {
+export class PokemonShellEffects implements OnInitEffects {
+
+  ngrxOnInitEffects(): Action {
+    return fromPokemonShellActions.getAllPokemonStart({ page: 0 });
+  }
 
   constructor(public actions$: Actions, private ps: PokemonShellService) {
   }
@@ -19,6 +23,15 @@ export class PokemonShellEffects {
     return this.actions$.pipe(
       ofType(fromPokemonShellActions.getAllPokemonStart),
       concatLatestFrom(() => this.ps.pagination$),
+      filter((res) => {
+        const paramsFromState: Pagination = res[1];
+        const actionPayload = res[0];
+        const requestPage = actionPayload.page;
+        if (requestPage !== undefined || paramsFromState.nextPageUrl) {
+          return true;
+        }
+        return false;
+      }),
       switchMap((res) => {
         let paramsFromState: Pagination = res[1];
         const actionPayload = res[0];

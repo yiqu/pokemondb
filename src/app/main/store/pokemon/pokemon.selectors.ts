@@ -33,6 +33,13 @@ export const isFilesFirstTimeLoading = createSelector(
   }
 );
 
+export const isApiLoading = createSelector(
+  pokemonShellFeatureState,
+  (state): boolean => {
+    return state.apiWorking;
+  }
+);
+
 export const getPagination = createSelector(
   pokemonShellFeatureState,
   (state): Pagination => {

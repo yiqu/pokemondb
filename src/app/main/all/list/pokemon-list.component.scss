@@ -1,0 +1,14 @@
+.poke-list {
+  .mat-list-option {
+    height: 30px;
+  }
+
+  .mat-list-option:hover {
+    background-color: #e4e6f9;
+  }
+
+  .mat-list-single-selected-option {
+    background-color: #e4e6f9;
+    font-weight: 500;
+  }
+}

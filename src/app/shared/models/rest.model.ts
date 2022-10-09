@@ -12,6 +12,7 @@ export interface Pagination {
   limit?: number;
   pages?: number;
   page?: number;
+  currentPage?: number;
 
   nextOffset?: number | null;
   prevOffset?: number;
@@ -32,12 +33,20 @@ export const calculateParams = (current: Pagination, page: PokemonResponse<Pokem
   const next = page.next;
   const prev = page.previous;
 
-  const pages = Math.ceil(total / ITEMS_PER_PAGE);
+  const pages = Math.floor(total / ITEMS_PER_PAGE);
+
+  let currentPage = 0;
 
   let nextOffset = current.nextOffset ?? 0;
+  
   if (next) {
     const nextparams = new URL(next).searchParams;
     nextOffset = +(nextparams.get("offset") ?? 0);
+    
+    const currentOffset = nextOffset - (current.limit ?? 20);
+    currentPage = currentOffset / (current.limit ?? 20);
+  } else {
+    currentPage = pages;
   }
 
   let prevOffset = current.prevOffset ?? 0;
@@ -52,6 +61,7 @@ export const calculateParams = (current: Pagination, page: PokemonResponse<Pokem
   return {
     pageRequested: current.pageRequested,
     limit: current.limit,
+    currentPage,
     nextOffset,
     prevOffset,
     firstOffset,

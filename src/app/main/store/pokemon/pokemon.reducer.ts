@@ -62,7 +62,7 @@ export const pokemonShellEntityReducer = createReducer(
     const data: PokemonShell[] = payload.results;
     const newPagination = calculateParams(state.pagination!, payload)
 
-    return adapter.setAll(data, {
+    return adapter.addMany(data, {
       ...state,
       apiWorking: false,
       firstTimeLoading: false,

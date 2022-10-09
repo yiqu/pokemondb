@@ -11,6 +11,7 @@ import { ZorroModuleBundle } from './zorro-bundle.module';
 import { SharedDropMenuComponent } from './components/drop-menu/drop-menu.component';
 import { LoadingBarCssComponent } from './components/loading-bar-css/loading-bar-css.component';
 import { PokemonLogoComponent } from './poke-logo/poke-logo.component';
+import { SharedActionComponent } from './action-bar/action-bar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PokemonLogoComponent } from './poke-logo/poke-logo.component';
     EnterEscapeKeyEventDirective,
     SharedDropMenuComponent,
     LoadingBarCssComponent,
-    PokemonLogoComponent
+    PokemonLogoComponent,
+    SharedActionComponent
   ],
 
   imports: [
@@ -44,7 +46,8 @@ import { PokemonLogoComponent } from './poke-logo/poke-logo.component';
     EnterEscapeKeyEventDirective,
     SharedDropMenuComponent,
     LoadingBarCssComponent,
-    PokemonLogoComponent
+    PokemonLogoComponent,
+    SharedActionComponent
   ],
 
   providers: [

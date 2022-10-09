@@ -1,0 +1,23 @@
+<div
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
+  (scrolled)="onScrollDown()"
+  [infiniteScrollContainer]="'.content-parent'"
+  [fromRoot]="true"
+  class="poke-list">
+    <ng-container *ngIf="(list && (list.length > 0)); else noItems">
+      <mat-selection-list #shoes [multiple]="false" dense>
+        <mat-list-option *ngFor="let pokemon of list" [value]="pokemon">
+          {{ pokemon.name }}
+        </mat-list-option>
+      </mat-selection-list>
+    </ng-container>
+</div>
+
+
+<ng-template #noItems>
+  <div>
+    No Pokemons found.
+  </div>
+</ng-template>

@@ -9,6 +9,9 @@ import { AppState } from '../store/global/app.reducer';
 import * as fromPokemonShellSelectors from './store/pokemon/pokemon.selectors';
 import * as fromPokemonShellActions from './store/pokemon/pokemon.actions';
 import { ScrollPosition } from './store/pokemon/pokemon.state';
+import * as fromPokemonActionsSelectors from './store/action-bar/action-bar.selectors';
+import { MenuOption } from '../shared/models/drop-menu.model';
+
 
 export const POKEMON_BASE_URL: string = 'https://pokeapi.co/api/v2';
 export const POKEMON_SHELL_BASE_URL: string = `${POKEMON_BASE_URL}/pokemon`;
@@ -19,6 +22,11 @@ export const POKEMON_SHELL_BASE_URL: string = `${POKEMON_BASE_URL}/pokemon`;
 export class PokemonShellService {
 
   public pagination$: Observable<Pagination> = this.store.select(fromPokemonShellSelectors.getPagination);
+  public actionBarActions$: Observable<MenuOption[]> = this.store.select(fromPokemonActionsSelectors.selectAll);
+  public pokemonList$: Observable<PokemonShell[]> = this.store.select(fromPokemonShellSelectors.selectAll);
+  public pokemonListLoading$: Observable<boolean> = this.store.select(fromPokemonShellSelectors.isApiLoading);
+  public allPaginationData$: Observable<Pagination> = this.store.select(fromPokemonShellSelectors.getPagination);
+
 
   constructor(public httpService: HttpService, private store: Store<AppState>) {
   }
@@ -38,5 +46,8 @@ export class PokemonShellService {
   public fetchPokemonShells(page?: number, scrollPosition?: ScrollPosition): void {
     this.store.dispatch(fromPokemonShellActions.getAllPokemonStart({ page: page, scrollPosition: scrollPosition }));
   }
+
+
+
 
 }
