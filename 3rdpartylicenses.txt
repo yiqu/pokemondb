@@ -182,6 +182,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 ng-zorro-antd
 MIT
 
+ngx-infinite-scroll
+MIT
+
 rxjs
 Apache-2.0
                                Apache License
