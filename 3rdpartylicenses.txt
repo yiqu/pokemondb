@@ -182,6 +182,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 ng-zorro-antd
 MIT
 
+ngx-device-detector
+MIT
+
 ngx-infinite-scroll
 MIT
 
