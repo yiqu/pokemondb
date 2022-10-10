@@ -15,6 +15,9 @@ import { pokemonShellEntityReducer } from './store/pokemon/pokemon.reducer';
 import { POKEMON_SHELL_STORE_KEY } from './store/pokemon/pokemon.state';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AllPokemonListComponent } from './all/list/pokemon-list.component';
+import { POKEMON_DETAIL_STORE_KEY } from './store/pokemon-detail/pokemon-detail.state';
+import { pokemonDetailReducer } from './store/pokemon-detail/pokemon-detail.reducer';
+import { pokemonDetailEffects } from './store/pokemon-detail/pokemon-detail.effects';
 
 @NgModule({
   imports: [
@@ -22,6 +25,8 @@ import { AllPokemonListComponent } from './all/list/pokemon-list.component';
     EffectsModule.forFeature(pokemonShellEffects),
     StoreModule.forFeature(ACTION_BAR_STORE_KEY, actionbarEntityReducer),
     EffectsModule.forFeature(allPokemonActionsEffects),
+    StoreModule.forFeature(POKEMON_DETAIL_STORE_KEY, pokemonDetailReducer),
+    EffectsModule.forFeature(pokemonDetailEffects),
     SharedBudleModule,
     LoadingModule,
     PipeBundleModule,

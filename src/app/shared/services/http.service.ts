@@ -24,7 +24,7 @@ export class HttpService {
       catchError((err: HttpErrorResponse) => {
         console.error(err);
         return throwError(() => {
-          return new Error("Error: " + err);
+          return err;
         });
       })
     );

@@ -11,7 +11,7 @@ import { ScrollPosition } from '../../store/pokemon/pokemon.state';
 export class AllPokemonListComponent implements OnInit {
 
   @Input()
-  list: PokemonShell[] | null = [];
+  list?: PokemonShell[] | null;
 
   @Output()
   scrollLoad: EventEmitter<ScrollPosition> = new EventEmitter<ScrollPosition>();

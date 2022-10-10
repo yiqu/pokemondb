@@ -26,7 +26,6 @@ export class AllPokemonComponent implements OnInit {
   }
 
   onScroll(pos: ScrollPosition) {
-    console.log("scrolling")
     this.navPage(ScrollPosition.Next);
   }
 

@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { OnInitEffects } from "@ngrx/effects";
 import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
-import { map, switchMap, iif, of, mergeMap, EMPTY, distinctUntilChanged, catchError, filter } from 'rxjs';
+import { map, switchMap, iif, of, mergeMap, EMPTY, distinctUntilChanged, catchError, filter, tap } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { PokemonShellService } from '../../pokemon-shell.service';
 import * as fromPokemonShellActions from './pokemon.actions';
 import { Pagination } from 'src/app/shared/models/rest.model';
 import { PokemonResponse, PokemonShell } from 'src/app/shared/models/pokmeon.model';
 import { ScrollPosition } from './pokemon.state';
+import { RouterService } from 'src/app/shared/services/router-service';
+import { ROUTER_NAVIGATION } from '@ngrx/router-store';
 
 @Injectable()
 export class PokemonShellEffects implements OnInitEffects {
@@ -16,7 +18,7 @@ export class PokemonShellEffects implements OnInitEffects {
     return fromPokemonShellActions.getAllPokemonStart({ page: 0 });
   }
 
-  constructor(public actions$: Actions, private ps: PokemonShellService) {
+  constructor(public actions$: Actions, private ps: PokemonShellService, public rs: RouterService) {
   }
 
   getPokemonShells$ = createEffect(() => {
@@ -51,13 +53,31 @@ export class PokemonShellEffects implements OnInitEffects {
 
         return this.ps.getPokemonShells(requestPage, fetchUrl).pipe(
           map((payload: PokemonResponse<PokemonShell>) => {
-            console.log(payload)
             return fromPokemonShellActions.getAllPokemonSuccess({ payload, fetchedDate: new Date().getTime() });
           })
         )
       })
     );
   });
+
+  getPokemonFromRouteParams$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ROUTER_NAVIGATION),
+      concatLatestFrom(() => this.rs.routeParams$),
+      filter((res) => {
+        const pokemonName: string = res[1]['pokemonName'];
+        return !!pokemonName;
+      }),
+      map((data) => {
+        return data[1]['pokemonName'];
+      }),
+      map((pokemonName: string) => {
+        return fromPokemonShellActions.getPokemonStart({ pokemonName });
+      })
+    );
+  });
+
+
 
 }
 

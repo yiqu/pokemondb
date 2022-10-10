@@ -2,8 +2,11 @@ import * as fromRouter from '@ngrx/router-store';
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { AppState } from '../global/app.reducer';
 import { Params } from '@angular/router';
+import { RouterReducerState } from '@ngrx/router-store';
+import { ROUTER_STATE } from './router.state';
 
-export const selectRouter = createFeatureSelector<AppState, fromRouter.RouterReducerState<any>>("myRouter");
+export const selectRouter = createFeatureSelector<RouterReducerState>(ROUTER_STATE);
+
 
 export const {
   selectCurrentRoute,   // select the current route
@@ -13,7 +16,8 @@ export const {
   selectRouteParams,    // select the current route params
   selectRouteParam,     // factory function to select a route param
   selectRouteData,      // select the current route data
-  selectUrl,            // select the current url
+  selectUrl,            // select the current url,
+  selectTitle
 } = fromRouter.getSelectors(selectRouter);
 
 

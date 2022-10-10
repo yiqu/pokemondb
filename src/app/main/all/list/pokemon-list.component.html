@@ -12,7 +12,12 @@
         <ng-container *ngFor="let pokemon of list">
           <a matLine [routerLink]="['../', pokemon.name]">
             <mat-list-item>
-              {{ pokemon.name }}
+              <div class="logo mr-2">
+                <img [src]="'assets/img/pokeball.png'" />
+              </div>
+              <div>
+                {{ pokemon.name }}
+              </div>
             </mat-list-item>
           </a>
         </ng-container>

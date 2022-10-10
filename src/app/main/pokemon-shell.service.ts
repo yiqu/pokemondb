@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { PokemonResponse, PokemonShell } from '../shared/models/pokmeon.model';
+import { Pokemon, PokemonResponse, PokemonShell } from '../shared/models/pokmeon.model';
 import { HParams, ITEMS_PER_PAGE, Pagination } from '../shared/models/rest.model';
 import { HttpService } from '../shared/services/http.service';
 import { AppState } from '../store/global/app.reducer';
@@ -25,6 +25,7 @@ export class PokemonShellService {
   public actionBarActions$: Observable<MenuOption[]> = this.store.select(fromPokemonActionsSelectors.selectAll);
   public pokemonList$: Observable<PokemonShell[]> = this.store.select(fromPokemonShellSelectors.selectAll);
   public pokemonListLoading$: Observable<boolean> = this.store.select(fromPokemonShellSelectors.isApiLoading);
+  public pokemonListFirstLoading$: Observable<boolean> = this.store.select(fromPokemonShellSelectors.isFilesFirstTimeLoading);
   public allPaginationData$: Observable<Pagination> = this.store.select(fromPokemonShellSelectors.getPagination);
 
 
@@ -41,6 +42,11 @@ export class PokemonShellService {
       pageParams = pageParams.set("limit", ITEMS_PER_PAGE);
     }
     return this.httpService.get<PokemonResponse<PokemonShell>>(fetchingUrl, pageParams);
+  }
+
+  public getPokemon(pokemonName: string): Observable<Pokemon> {
+    const url = `${POKEMON_SHELL_BASE_URL}/${pokemonName}`;
+    return this.httpService.get<Pokemon>(url);
   }
 
   public fetchPokemonShells(page?: number, scrollPosition?: ScrollPosition): void {
