@@ -11,7 +11,7 @@ import * as fromPokemonShellActions from './store/pokemon/pokemon.actions';
 import { ScrollPosition } from './store/pokemon/pokemon.state';
 import * as fromPokemonActionsSelectors from './store/action-bar/action-bar.selectors';
 import { MenuOption } from '../shared/models/drop-menu.model';
-
+import * as fromPokemonDetailSelectors from './store/pokemon-detail/pokemon-detail.selectors';
 
 export const POKEMON_BASE_URL: string = 'https://pokeapi.co/api/v2';
 export const POKEMON_SHELL_BASE_URL: string = `${POKEMON_BASE_URL}/pokemon`;
@@ -27,7 +27,8 @@ export class PokemonShellService {
   public pokemonListLoading$: Observable<boolean> = this.store.select(fromPokemonShellSelectors.isApiLoading);
   public pokemonListFirstLoading$: Observable<boolean> = this.store.select(fromPokemonShellSelectors.isFilesFirstTimeLoading);
   public allPaginationData$: Observable<Pagination> = this.store.select(fromPokemonShellSelectors.getPagination);
-
+  public pokemonDetailLoading$: Observable<boolean> = this.store.select(fromPokemonDetailSelectors.isApiLoading);
+  public selectedPokemon$: Observable<Pokemon | undefined> = this.store.select(fromPokemonDetailSelectors.getSelectedPokemon);
 
   constructor(public httpService: HttpService, private store: Store<AppState>) {
   }

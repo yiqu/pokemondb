@@ -1,11 +1,12 @@
 import { createAction, Action, on, createReducer } from "@ngrx/store"
 import { PokemonDetailState } from "./pokemon-detail.state";
 import * as fromPokemonShellActions from '../pokemon/pokemon.actions';
-
+import { Pokemon } from '../../../shared/models/pokmeon.model';
 
 const initialState: PokemonDetailState = {
   apiLoading: false,
   pokemonFetching: null,
+  pokemon: undefined,
   error: false
 }
 

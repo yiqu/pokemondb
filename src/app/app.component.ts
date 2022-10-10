@@ -10,6 +10,8 @@ import { environment } from 'src/environments/environment';
 import { AppMetaService } from './shared/services/app-meta.service';
 import { IsMobileService } from './shared/services/is-mobile.service';
 import { AppState } from './store/global/app.reducer';
+import { DeviceDetectorService } from 'ngx-device-detector';
+
 
 @Component({
   selector: 'app-root',
@@ -21,13 +23,16 @@ export class AppComponent implements OnInit {
   footerTitle: string = "@KQ 2022";
   myUrl: string = "https://yiqu.github.io/";
   compDest$: Subject<any> = new Subject<any>();
+  isMobile: boolean = false;
 
   @ViewChild("snav")
   sideNav!: MatSidenav;
 
 
-  constructor(public changeDetectorRef: ChangeDetectorRef, public ims: IsMobileService, public media: MediaMatcher,
-    private store: Store<AppState>, public ms: AppMetaService) {
+  constructor(public changeDetectorRef: ChangeDetectorRef,
+    private store: Store<AppState>, public ms: AppMetaService,
+    public ds: DeviceDetectorService) {
+      this.isMobile = this.ds.isMobile();
   }
 
   ngOnInit() {

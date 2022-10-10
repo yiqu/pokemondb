@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PokemonShellService } from 'src/app/main/pokemon-shell.service';
+import { scrollToElementById, scrollToTop } from 'src/app/shared/general.utils';
 
 @Component({
   selector: 'app-main-all-pokemon-detail',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PokemonDetailComponent implements OnInit {
 
-  constructor() {
+  constructor(public ps: PokemonShellService) {
   }
 
   ngOnInit() {
+    scrollToElementById('app-dashboard-action-bar');
   }
 }

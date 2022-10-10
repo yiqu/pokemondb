@@ -1,3 +1,21 @@
-<div>
-  Detail!
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
+  <ng-container *ngIf="((this.ps.pokemonDetailLoading$ | async) === false); else isLoading">
+    <ng-container *ngIf="(this.ps.selectedPokemon$ | async) as pokemon">
+      <ng-container *ngIf="pokemon">
+
+        <div>
+          <div>
+            {{ pokemon.name }}
+          </div>
+        </div>
+
+      </ng-container>
+    </ng-container>
+  </ng-container>
 </div>
+
+<ng-template #isLoading>
+  <div class="my-5">
+    <app-shared-loading></app-shared-loading>
+  </div>
+</ng-template>

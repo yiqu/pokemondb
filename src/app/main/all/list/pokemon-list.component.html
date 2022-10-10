@@ -23,6 +23,10 @@
         </ng-container>
       </mat-nav-list>
 
+      <ng-container *ngIf="(this.ps.pokemonListLoading$ | async)">
+        <app-shared-loading [message]="'Pokemons'"></app-shared-loading>
+      </ng-container>
+
     </ng-container>
 </div>
 

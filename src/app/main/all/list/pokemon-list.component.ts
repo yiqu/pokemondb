@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PokemonShell } from 'src/app/shared/models/pokmeon.model';
+import { PokemonShellService } from '../../pokemon-shell.service';
 import { ScrollPosition } from '../../store/pokemon/pokemon.state';
 
 @Component({
@@ -16,7 +17,7 @@ export class AllPokemonListComponent implements OnInit {
   @Output()
   scrollLoad: EventEmitter<ScrollPosition> = new EventEmitter<ScrollPosition>();
 
-  constructor() {
+  constructor(public ps: PokemonShellService) {
 
   }
 

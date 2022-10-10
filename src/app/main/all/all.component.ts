@@ -10,7 +10,7 @@ import { ScrollPosition } from '../store/pokemon/pokemon.state';
 })
 export class AllPokemonComponent implements OnInit {
 
-  title: string = "All Pokemons";
+  title: string = "Pokemon Directory";
   scrollPosition = ScrollPosition;
   actionBtns: MenuOption[] = [];
   showPageData: boolean = false;

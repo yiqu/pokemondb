@@ -1,31 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
 
-  <div class="sticky-top dashboard">
-    <shared-action-bar [actions]="(this.ps.actionBarActions$ | async)">
-      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px" class="page-data">
-        <div>
-          {{ (this.ps.pokemonListLoading$ | async) ? 'Loading...' : '' }}
-        </div>
-        <div> | </div>
-        <div>
-          <ng-container *ngIf="showPageData; else showBtn">
-            <ng-container *ngIf="(this.ps.allPaginationData$ | async) as pageData">
-              <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px">
-                <div>
-                  page {{ pageData.currentPage }} / {{ pageData.pages }}
-                </div>
-                <div> | </div>
-                <div>
-                  total: {{ pageData.totalCount }}
-                </div>
-              </div>
-            </ng-container>
-          </ng-container>
-        </div>
-      </div>
-    </shared-action-bar>
-  </div>
-
   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px" class="w-100 p-title">
     {{ title }}
   </div>
@@ -37,10 +11,6 @@
   </ng-container>
 
 </div>
-
-<ng-template #showBtn>
-  <button mat-button color="primary" (click)="this.togglePageData()">Show pagination data</button>
-</ng-template>
 
 <ng-template #firstTimeLoadMask>
   <div class="my-5">

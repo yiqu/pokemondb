@@ -18,6 +18,7 @@ import { AllPokemonListComponent } from './all/list/pokemon-list.component';
 import { POKEMON_DETAIL_STORE_KEY } from './store/pokemon-detail/pokemon-detail.state';
 import { pokemonDetailReducer } from './store/pokemon-detail/pokemon-detail.reducer';
 import { pokemonDetailEffects } from './store/pokemon-detail/pokemon-detail.effects';
+import { PokemonDetailComponent } from './all/list/detail/pokemon-detail.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { pokemonDetailEffects } from './store/pokemon-detail/pokemon-detail.effe
   declarations: [
     MainComponent,
     AllPokemonComponent,
-    AllPokemonListComponent
+    AllPokemonListComponent,
+    PokemonDetailComponent
   ],
 
   providers: [],

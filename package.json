@@ -38,6 +38,7 @@
     "ng-busy-watch": "^13.0.2",
     "ng-zorro-antd": "^14.0.0",
     "ngrx-store-localstorage": "^14.0.0",
+    "ngx-device-detector": "^4.0.1",
     "ngx-infinite-scroll": "^14.0.0",
     "popper.js": "^1.16.1",
     "rxjs": "~7.5.0",
