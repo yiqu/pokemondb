@@ -19,6 +19,7 @@ export const pokemonDetailReducer = createReducer(
     return {
       ...state,
       pokemonFetching: pokemonName,
+      species: undefined,
       apiLoading: true
     }
   }),
