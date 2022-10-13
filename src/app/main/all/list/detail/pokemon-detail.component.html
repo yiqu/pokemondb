@@ -1,12 +1,49 @@
-<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
+<div>
   <ng-container *ngIf="((this.ps.pokemonDetailLoading$ | async) === false); else isLoading">
     <ng-container *ngIf="(this.ps.selectedPokemon$ | async) as pokemon">
       <ng-container *ngIf="pokemon">
 
         <div>
-          <div>
+          <h3 class="poke-title">
             {{ pokemon.name }}
+          </h3>
+
+          <div class="float-left poke-profile mb-2 mr-2" [ngClass.lt-md]="'mobile-width'">
+            <div class="card" [ngStyle]="{'background-color': (pokemon.types[0]?.type?.name | pokemonTypeColorHex)}">
+              <div class="card-body">
+                <h5 class="card-title" fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="10px"
+                  >
+                  <div class="white-section w-100 section-1">
+                    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+                      <div class="font-weight-bold">
+                        {{ pokemon.name }}
+                      </div>
+                      <div fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start center" fxLayoutGap.gt-sm="5px">
+                        <ng-container *ngFor="let type of pokemon.types; last as isLast">
+                          <div class="poke-type font-weight-normal">
+                            {{type.type.name}}{{ isLast ? '' : ',' }}
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="white-section section-1 font-weight-bold" fxLayout="column" fxLayoutAlign="center center">
+                    #{{ pokemon.id }}
+                  </div>
+                </h5>
+                <div class="poke-pic text-center">
+                  <img [src]="pokemon.sprites.other['official-artwork']['front_default']" />
+                </div>
+                <app-main-all-pokemon-detail-flavor-text></app-main-all-pokemon-detail-flavor-text>
+              </div>
+            </div>
           </div>
+
+          <p>
+            Pokemon {{ pokemon.name }}
+          </p>
+
+
         </div>
 
       </ng-container>

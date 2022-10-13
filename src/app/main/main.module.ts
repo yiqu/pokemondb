@@ -19,6 +19,8 @@ import { POKEMON_DETAIL_STORE_KEY } from './store/pokemon-detail/pokemon-detail.
 import { pokemonDetailReducer } from './store/pokemon-detail/pokemon-detail.reducer';
 import { pokemonDetailEffects } from './store/pokemon-detail/pokemon-detail.effects';
 import { PokemonDetailComponent } from './all/list/detail/pokemon-detail.component';
+import { PokemonModule } from '../shared/pokemon.module';
+import { PokemonFlavorTextComponent } from './all/list/detail/flavor-text/flavor-text.component';
 
 @NgModule({
   imports: [
@@ -32,6 +34,7 @@ import { PokemonDetailComponent } from './all/list/detail/pokemon-detail.compone
     LoadingModule,
     PipeBundleModule,
     InfiniteScrollModule,
+    PokemonModule,
     MainRoutingModule
   ],
 
@@ -42,7 +45,8 @@ import { PokemonDetailComponent } from './all/list/detail/pokemon-detail.compone
     MainComponent,
     AllPokemonComponent,
     AllPokemonListComponent,
-    PokemonDetailComponent
+    PokemonDetailComponent,
+    PokemonFlavorTextComponent
   ],
 
   providers: [],

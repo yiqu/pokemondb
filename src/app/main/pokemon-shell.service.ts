@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Pokemon, PokemonResponse, PokemonShell } from '../shared/models/pokmeon.model';
+import { Pokemon, PokemonResponse, PokemonShell, PokemonSpecies } from '../shared/models/pokmeon.model';
 import { HParams, ITEMS_PER_PAGE, Pagination } from '../shared/models/rest.model';
 import { HttpService } from '../shared/services/http.service';
 import { AppState } from '../store/global/app.reducer';
@@ -30,6 +30,8 @@ export class PokemonShellService {
   public pokemonDetailLoading$: Observable<boolean> = this.store.select(fromPokemonDetailSelectors.isApiLoading);
   public selectedPokemon$: Observable<Pokemon | undefined> = this.store.select(fromPokemonDetailSelectors.getSelectedPokemon);
 
+
+
   constructor(public httpService: HttpService, private store: Store<AppState>) {
   }
 
@@ -49,6 +51,7 @@ export class PokemonShellService {
     const url = `${POKEMON_SHELL_BASE_URL}/${pokemonName}`;
     return this.httpService.get<Pokemon>(url);
   }
+
 
   public fetchPokemonShells(page?: number, scrollPosition?: ScrollPosition): void {
     this.store.dispatch(fromPokemonShellActions.getAllPokemonStart({ page: page, scrollPosition: scrollPosition }));

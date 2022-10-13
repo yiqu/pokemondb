@@ -1,0 +1,51 @@
+.poke-title {
+  font-size: 30px;
+}
+
+.white-section {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.poke-profile {
+  width: 33%;
+
+  .card {
+
+    border: 2px solid #682A68;
+    border-radius: 10px;
+    padding: 8px;
+
+    .card-body {
+      padding: 0px;
+    }
+
+    .card-title {
+      font-size: 22px;
+    }
+
+    .poke-type {
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    .poke-pic {
+      height: 15rem;
+      background-color: #fff;
+      border-radius: 25px;
+      margin-bottom: 12px;
+
+      img {
+        height: 100%;
+      }
+    }
+
+  }
+}
+
+.poke-profile.mobile-width {
+  width: 100%;
+}
+

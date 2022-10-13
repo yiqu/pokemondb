@@ -7,7 +7,8 @@ const initialState: PokemonDetailState = {
   apiLoading: false,
   pokemonFetching: null,
   pokemon: undefined,
-  error: false
+  error: false,
+  species: undefined,
 }
 
 export const pokemonDetailReducer = createReducer(
@@ -40,6 +41,14 @@ export const pokemonDetailReducer = createReducer(
       apiLoading: false,
       errMsg,
       error: true
+    }
+  }),
+
+  on(fromPokemonShellActions.getPokemonSpeciesSuccess, (state, { payload }) => {
+
+    return {
+      ...state,
+      species: payload
     }
   })
 

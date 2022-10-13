@@ -1,4 +1,4 @@
-import { Pokemon } from "src/app/shared/models/pokmeon.model";
+import { Pokemon, PokemonSpecies } from "src/app/shared/models/pokmeon.model";
 
 export const POKEMON_DETAIL_STORE_KEY = "pokemonDetail";
 
@@ -9,4 +9,5 @@ export interface PokemonDetailState {
   apiLoading: boolean;
   pokemonFetching?: string | null;
   pokemon?: Pokemon;
+  species?: PokemonSpecies;
 }

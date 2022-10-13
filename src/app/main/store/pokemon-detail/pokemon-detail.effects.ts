@@ -6,13 +6,15 @@ import { Pokemon, PokemonResponse, PokemonShell } from 'src/app/shared/models/po
 import { RouterService } from 'src/app/shared/services/router-service';
 import * as fromPokemonShellActions from '../pokemon/pokemon.actions';
 import { HttpErrorResponse } from '@angular/common/http';
+import { PokemonSpeciesService } from '../../pokemon-species.service';
 
 
 
 @Injectable()
 export class PokemonDetailEffects {
 
-  constructor(public actions$: Actions, private ps: PokemonShellService, public rs: RouterService) {
+  constructor(public actions$: Actions, private ps: PokemonShellService, public rs: RouterService,
+    private pss: PokemonSpeciesService) {
   }
 
 
@@ -33,6 +35,33 @@ export class PokemonDetailEffects {
       })
     );
   });
+
+  getPokemonSpeciesTrigger$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(fromPokemonShellActions.getPokemonSuccess),
+      map((res) => {
+        const pokemon: Pokemon = res.payload;
+        const speciesUrl: string = pokemon.species.url;
+        return fromPokemonShellActions.getPokemonSpeciesStart({ url: speciesUrl });
+      })
+    );
+  });
+
+  getPokemonSpecies$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(fromPokemonShellActions.getPokemonSpeciesStart),
+      switchMap((res) => {
+        const url = res.url;
+        return this.pss.getSpecies(url).pipe(
+          map((species) => {
+            return fromPokemonShellActions.getPokemonSpeciesSuccess({ payload: species, fetchedDate: new Date().getTime() });
+          })
+        );
+      })
+    );
+  });
+
+
 
 
 }

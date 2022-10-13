@@ -7,6 +7,7 @@ export interface PokemonSprites {
   front_default: string;
   front_shiny: string;
   back_default: string;
+  other: any;
 }
 
 export interface PokemonResponse<T> {
@@ -38,4 +39,21 @@ export interface Pokemon {
   stats: any[];
   types: any[];
   sprites: PokemonSprites;
+}
+
+export interface NameUrl {
+  name: string;
+  url: string;
+}
+
+export interface PokemonSpecies {
+  capture_rate: number;
+  color: NameUrl;
+  flavor_text_entries: FlavorTextEntry[];
+}
+
+export interface FlavorTextEntry {
+  flavor_text: string;
+  language: NameUrl;
+  version: NameUrl;
 }
