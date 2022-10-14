@@ -4,13 +4,15 @@
 
 .poke-list {
 
+  .poke-list-item.last-selected {
+    .mat-list-item {
+      background-color: #eeeff9;
+    }
+
+  }
+
   .mat-list-item {
     height: 35px;
-
-    a {
-      width: 100%;
-      height: 100%;
-    }
 
     .logo {
       img {

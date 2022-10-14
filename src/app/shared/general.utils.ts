@@ -17,13 +17,13 @@ export function createFormControl2(value: any, disabled: boolean, validators: an
 }
 
 
-export function scrollToElementById(id: string): void {
+export function scrollToElementById(id: string, timeout?: number, position?: ScrollLogicalPosition): void {
   let top = document.getElementById(id);
   if (top) {
     setTimeout(() => {
-      top?.scrollIntoView({block: "start"});
+      top?.scrollIntoView({block: position as any ?? "start"});
       top = null;
-    }, 5)
+    }, timeout ?? 5)
   }
 }
 

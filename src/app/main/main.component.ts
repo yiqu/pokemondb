@@ -23,13 +23,11 @@ export class MainComponent implements OnInit {
         tap((res) => {
           if (res?.name) {
             setTimeout(() => {
-              scrollToElementById(res.name);
-            }, 500)
-
+              scrollToElementById(res.name, 5, 'center')
+            }, 5)
           }
         })
       ).subscribe();
     }
-
   }
 }

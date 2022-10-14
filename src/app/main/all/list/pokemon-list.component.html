@@ -10,7 +10,8 @@
 
       <mat-nav-list dense>
         <ng-container *ngFor="let pokemon of list">
-          <a matLine [routerLink]="['../', pokemon.name]">
+          <a matLine [routerLink]="['../', pokemon.name]"
+            [ngClass]="{'poke-list-item':true, 'last-selected': ((this.ps.selectedPokemon$ | async)?.name) === pokemon.name}">
             <mat-list-item>
               <div class="logo mr-2">
                 <img [src]="'assets/img/pokeball.png'" />
