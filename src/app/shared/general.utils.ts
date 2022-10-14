@@ -21,9 +21,9 @@ export function scrollToElementById(id: string): void {
   let top = document.getElementById(id);
   if (top) {
     setTimeout(() => {
-      top?.scrollIntoView({block: "end"});
+      top?.scrollIntoView({block: "start"});
       top = null;
-    }, 10)
+    }, 5)
   }
 }
 

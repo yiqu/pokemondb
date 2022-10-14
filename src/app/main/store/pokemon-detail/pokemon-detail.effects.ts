@@ -7,6 +7,7 @@ import { RouterService } from 'src/app/shared/services/router-service';
 import * as fromPokemonShellActions from '../pokemon/pokemon.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PokemonSpeciesService } from '../../pokemon-species.service';
+import { scrollToElementById } from 'src/app/shared/general.utils';
 
 
 

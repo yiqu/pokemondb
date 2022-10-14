@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { delay, Observable } from 'rxjs';
 import { Pokemon, PokemonResponse, PokemonShell, PokemonSpecies } from '../shared/models/pokmeon.model';
 import { HParams, ITEMS_PER_PAGE, Pagination } from '../shared/models/rest.model';
 import { HttpService } from '../shared/services/http.service';
@@ -49,12 +49,16 @@ export class PokemonShellService {
 
   public getPokemon(pokemonName: string): Observable<Pokemon> {
     const url = `${POKEMON_SHELL_BASE_URL}/${pokemonName}`;
-    return this.httpService.get<Pokemon>(url);
+    return this.httpService.get<Pokemon>(url).pipe();
   }
 
 
   public fetchPokemonShells(page?: number, scrollPosition?: ScrollPosition): void {
     this.store.dispatch(fromPokemonShellActions.getAllPokemonStart({ page: page, scrollPosition: scrollPosition }));
+  }
+
+  public resetPokemonDetailProp(): void {
+    this.store.dispatch(fromPokemonShellActions.getPokemonReset());
   }
 
 

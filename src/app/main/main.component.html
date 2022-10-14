@@ -1,4 +1,4 @@
-<div class="container-fluid mb-5">
+<div class="container-fluid mb-5 main">
 
   <div class="sticky-top dashboard">
     <shared-action-bar [actions]="(this.ps.actionBarActions$ | async)">
@@ -26,7 +26,7 @@
     </shared-action-bar>
   </div>
 
-  <router-outlet></router-outlet>
+  <router-outlet (activate)="onActivate($event)"></router-outlet>
 
 </div>
 

@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Actions, concatLatestFrom, createEffect, ofType } from "@ngrx/effects";
-import { ROUTER_NAVIGATION } from "@ngrx/router-store";
+import { ROUTER_NAVIGATED, ROUTER_NAVIGATION } from "@ngrx/router-store";
 import { filter, map, switchMap, tap } from "rxjs/operators";
+import { scrollToElementById } from "src/app/shared/general.utils";
 import { RouterService } from "src/app/shared/services/router-service";
 import { environment } from "src/environments/environment";
 
@@ -51,6 +52,15 @@ export class AppGlobalRouterEffects {
     return this.actions$.pipe(
       ofType(ROUTER_NAVIGATION),
       concatLatestFrom(() => this.rs.nestedRouteParams$),
+      tap((res) => {
+      })
+    );
+  }, {dispatch: false});
+
+  scrollToTopAfterNavigate$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ROUTER_NAVIGATION),
+      concatLatestFrom(() => this.rs.routeParams$),
       tap((res) => {
       })
     );

@@ -8,6 +8,7 @@ const GET_ALL_POKEMON_SUCCESS: string = '[Pokemon All/API] Get all pokemon succe
 const GET_ALL_POKEMON_FAILURE: string = '[Pokemon All/API] Get all pokemon failure';
 
 
+const GET_POKEMON_RESET: string = '[Pokemon/UI] Reset pokemon detail prop';
 const GET_POKEMON_START: string = '[Pokemon/API] Get a pokemon start';
 const GET_OKEMON_SUCCESS: string = '[Pokemon/API] Get a pokemon successful';
 const GET_POKEMON_FAILURE: string = '[Pokemon/API] Get a pokemon failure';
@@ -29,6 +30,10 @@ export const getAllPokemonSuccess = createAction(
 export const getAllPokemonFailure = createAction(
   GET_ALL_POKEMON_FAILURE,
   props<{errMsg: string}>()
+)
+
+export const getPokemonReset = createAction(
+  GET_POKEMON_RESET
 )
 
 export const getPokemonStart = createAction(

@@ -14,13 +14,22 @@ const initialState: PokemonDetailState = {
 export const pokemonDetailReducer = createReducer(
   initialState,
 
+  on(fromPokemonShellActions.getPokemonReset, (state) => {
+
+    return {
+      ...state,
+      pokemon: undefined
+    }
+  }),
+
   on(fromPokemonShellActions.getPokemonStart, (state, { pokemonName }) => {
 
     return {
       ...state,
       pokemonFetching: pokemonName,
       species: undefined,
-      apiLoading: true
+      apiLoading: true,
+      pokemon: undefined
     }
   }),
 

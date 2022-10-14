@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { tap } from 'rxjs';
+import { scrollToElementById } from '../shared/general.utils';
 import { PokemonShellService } from './pokemon-shell.service';
 
 @Component({
@@ -11,5 +13,23 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onActivate(component: any) {
+    if (component.compId === "pokemonDetails") {
+      scrollToElementById('app-dashboard-action-bar');
+    } else if (component.compId === "pokemonList") {
+      this.ps.selectedPokemon$.pipe(
+        tap((res) => {
+          if (res?.name) {
+            setTimeout(() => {
+              scrollToElementById(res.name);
+            }, 500)
+
+          }
+        })
+      ).subscribe();
+    }
+
   }
 }

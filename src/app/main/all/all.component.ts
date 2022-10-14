@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { delay } from 'rxjs';
+import { scrollToElementById } from 'src/app/shared/general.utils';
 import { MenuOption } from 'src/app/shared/models/drop-menu.model';
 import { PokemonShellService } from '../pokemon-shell.service';
 import { ScrollPosition } from '../store/pokemon/pokemon.state';
@@ -10,6 +12,7 @@ import { ScrollPosition } from '../store/pokemon/pokemon.state';
 })
 export class AllPokemonComponent implements OnInit {
 
+  compId: string = 'pokemonList';
   title: string = "Pokemon Directory";
   scrollPosition = ScrollPosition;
   actionBtns: MenuOption[] = [];
