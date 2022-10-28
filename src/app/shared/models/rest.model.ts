@@ -1,6 +1,6 @@
 import { PokemonResponse, PokemonShell } from "./pokmeon.model";
 
-export const ITEMS_PER_PAGE: number = 20;
+export const ITEMS_PER_PAGE: number = 60;
 
 export interface HParams {
   offset: number;
@@ -43,8 +43,8 @@ export const calculateParams = (current: Pagination, page: PokemonResponse<Pokem
     const nextparams = new URL(next).searchParams;
     nextOffset = +(nextparams.get("offset") ?? 0);
     
-    const currentOffset = nextOffset - (current.limit ?? 20);
-    currentPage = currentOffset / (current.limit ?? 20);
+    const currentOffset = nextOffset - (current.limit ?? ITEMS_PER_PAGE);
+    currentPage = currentOffset / (current.limit ?? ITEMS_PER_PAGE);
   } else {
     currentPage = pages;
   }
@@ -56,7 +56,7 @@ export const calculateParams = (current: Pagination, page: PokemonResponse<Pokem
   }
 
   const firstOffset = 0;
-  const lastOffset = (pages * ITEMS_PER_PAGE) - ITEMS_PER_PAGE;
+  const lastOffset = (pages * ITEMS_PER_PAGE);
 
   return {
     pageRequested: current.pageRequested,

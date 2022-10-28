@@ -1,10 +1,9 @@
 import { EntityState, createEntityAdapter, Update } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 import { PokemonShell } from 'src/app/shared/models/pokmeon.model';
-import { calculateParams, Pagination } from 'src/app/shared/models/rest.model';
+import { calculateParams, ITEMS_PER_PAGE, Pagination } from 'src/app/shared/models/rest.model';
 import * as fromPokemonShellActions from './pokemon.actions';
 
-export const ITEMS_PER_PAGE: number = 20;
 
 export interface PokemonShellEntityState extends EntityState<PokemonShell> {
   apiWorking: boolean;
@@ -13,6 +12,7 @@ export interface PokemonShellEntityState extends EntityState<PokemonShell> {
   errMsg: string;
   pagination: Pagination;
   lastFetchedDate: number;
+  endReached: boolean;
 }
 
 export function selectId(pokemon: PokemonShell) {
@@ -39,7 +39,8 @@ export const inititalState = adapter.getInitialState<Partial<PokemonShellEntityS
   pagination: {
     limit: ITEMS_PER_PAGE,
     firstOffset: 0
-  }
+  },
+  endReached: false
 });
 
 
@@ -60,7 +61,7 @@ export const pokemonShellEntityReducer = createReducer(
 
   on(fromPokemonShellActions.getAllPokemonSuccess, (state, { payload,  fetchedDate }) => {
     const data: PokemonShell[] = payload.results;
-    const newPagination = calculateParams(state.pagination!, payload)
+    const newPagination = calculateParams(state.pagination!, payload);
 
     return adapter.addMany(data, {
       ...state,
@@ -69,7 +70,8 @@ export const pokemonShellEntityReducer = createReducer(
       error: false,
       errMsg: undefined,
       pagination: newPagination,
-      lastFetchedDate: fetchedDate
+      lastFetchedDate: fetchedDate,
+      endReached: !payload.next
     });
   }),
 

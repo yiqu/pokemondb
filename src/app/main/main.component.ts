@@ -17,7 +17,7 @@ export class MainComponent implements OnInit {
 
   onActivate(component: any) {
     if (component.compId === "pokemonDetails") {
-      scrollToElementById('app-dashboard-action-bar');
+      
     } else if (component.compId === "pokemonList") {
       this.ps.selectedPokemon$.pipe(
         tap((res) => {

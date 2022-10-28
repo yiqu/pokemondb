@@ -1,10 +1,11 @@
 <div
   infiniteScroll
-  [infiniteScrollDistance]="2"
+  [infiniteScrollDistance]="1"
   [infiniteScrollThrottle]="50"
   (scrolled)="onScrollDown()"
   [infiniteScrollContainer]="'.content-parent'"
   [fromRoot]="true"
+  [infiniteScrollDisabled]="scrollDisabled"
   class="poke-list">
     <ng-container *ngIf="(list && (list.length > 0)); else noItems">
 
@@ -17,7 +18,7 @@
                 <img [src]="'assets/img/pokeball.png'" />
               </div>
               <div [id]="pokemon.name">
-                {{ pokemon.name }}
+              {{ pokemon.pokemonId }} - {{ pokemon.name }}
               </div>
             </mat-list-item>
           </a>

@@ -32,7 +32,7 @@ export class PokemonShellEffects implements OnInitEffects {
         if (requestPage !== undefined || paramsFromState.nextPageUrl) {
           return true;
         }
-        return false;
+        return false; // need to return action to success TODO
       }),
       switchMap((res) => {
         let paramsFromState: Pagination = res[1];
@@ -53,7 +53,20 @@ export class PokemonShellEffects implements OnInitEffects {
 
         return this.ps.getPokemonShells(requestPage, fetchUrl).pipe(
           map((payload: PokemonResponse<PokemonShell>) => {
-            return fromPokemonShellActions.getAllPokemonSuccess({ payload, fetchedDate: new Date().getTime() });
+            const dataWithIdAdded = payload.results.map((poke: PokemonShell) => {
+              const pokeUrl = poke.url;
+              const urlSegments = pokeUrl.split("/");
+              const pokeId = urlSegments[urlSegments.length - 2];
+              return {
+                ...poke,
+                pokemonId: pokeId
+              }
+            });
+            const resultData = {
+              ...payload,
+              results: dataWithIdAdded
+            }
+            return fromPokemonShellActions.getAllPokemonSuccess({ payload: resultData, fetchedDate: new Date().getTime() });
           })
         )
       })

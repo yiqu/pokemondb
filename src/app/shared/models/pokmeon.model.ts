@@ -20,6 +20,7 @@ export interface PokemonResponse<T> {
 export interface PokemonShell {
   name: string;
   url: string;
+  pokemonId?: string;
 }
 
 export interface Pokemon {

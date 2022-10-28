@@ -17,6 +17,9 @@ export class AllPokemonListComponent implements OnInit {
   @Output()
   scrollLoad: EventEmitter<ScrollPosition> = new EventEmitter<ScrollPosition>();
 
+  @Input()
+  scrollDisabled: boolean = false;
+
   constructor(public ps: PokemonShellService) {
 
   }

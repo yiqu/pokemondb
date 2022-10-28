@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { delay, map, Subject, take, takeUntil } from 'rxjs';
 import { PokemonShellService } from 'src/app/main/pokemon-shell.service';
@@ -10,7 +10,7 @@ import { Pokemon } from 'src/app/shared/models/pokmeon.model';
   templateUrl: 'pokemon-detail.component.html',
   styleUrls: ['./pokemon-detail.component.scss']
 })
-export class PokemonDetailComponent implements OnInit, OnDestroy {
+export class PokemonDetailComponent implements OnInit, OnDestroy, AfterViewInit {
 
   compId: string = 'pokemonDetails';
   pokemonDetail?: Pokemon = undefined;
@@ -28,6 +28,10 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit(): void {
+    scrollToElementById('pokemon-detail-name', 0, 'center');
   }
 
   ngOnDestroy(): void {

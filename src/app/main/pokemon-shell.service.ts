@@ -29,7 +29,7 @@ export class PokemonShellService {
   public allPaginationData$: Observable<Pagination> = this.store.select(fromPokemonShellSelectors.getPagination);
   public pokemonDetailLoading$: Observable<boolean> = this.store.select(fromPokemonDetailSelectors.isApiLoading);
   public selectedPokemon$: Observable<Pokemon | undefined> = this.store.select(fromPokemonDetailSelectors.getSelectedPokemon);
-
+  public pokemonListEndReached$: Observable<boolean> = this.store.select(fromPokemonShellSelectors.getEndReached);
 
 
   constructor(public httpService: HttpService, private store: Store<AppState>) {

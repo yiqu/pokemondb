@@ -46,3 +46,10 @@ export const getPagination = createSelector(
     return state.pagination;
   }
 );
+
+export const getEndReached = createSelector(
+  pokemonShellFeatureState,
+  (state): boolean => {
+    return state.endReached;
+  }
+);

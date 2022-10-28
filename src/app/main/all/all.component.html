@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
+<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="15px" class="main">
 
   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px" class="w-100 p-title">
     {{ title }}
@@ -6,7 +6,9 @@
 
   <ng-container *ngIf="((this.ps.pokemonListFirstLoading$ | async) === false); else firstTimeLoadMask">
     <div class="w-100" fxLayout="row" fxLayoutAlign="start start">
-      <app-main-all-pokemon-list [list]="(this.ps.pokemonList$ | async)" (scrollLoad)="this.onScroll($event)"></app-main-all-pokemon-list>
+      <app-main-all-pokemon-list [list]="(this.ps.pokemonList$ | async)" 
+        (scrollLoad)="this.onScroll($event)" [scrollDisabled]="!!(this.ps.pokemonListEndReached$ | async)">
+      </app-main-all-pokemon-list>
     </div>
   </ng-container>
 
