@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PokemonShell } from 'src/app/shared/models/pokmeon.model';
+import { PokemonShell, PokemonShellFavorite } from 'src/app/shared/models/pokmeon.model';
 import { PokemonShellService } from '../../pokemon-shell.service';
 import { ScrollPosition } from '../../store/pokemon/pokemon.state';
 
@@ -25,7 +25,6 @@ export class AllPokemonListComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   showInfo(pokemon: any) {
@@ -34,6 +33,15 @@ export class AllPokemonListComponent implements OnInit {
 
   onScrollDown() {
     this.scrollLoad.emit(ScrollPosition.Next);
+  }
+
+  onFavToggle(pokemon: PokemonShell) {
+    console.log(pokemon)
+    this.ps.pokemonFavorite(pokemon);
+  }
+
+  trackByFn(index: number, item: PokemonShell) {
+    return item.name;
   }
 
 }

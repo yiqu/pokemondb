@@ -12,7 +12,7 @@ import { actionbarEntityReducer } from './store/action-bar/action-bar.reducer';
 import { ACTION_BAR_STORE_KEY } from './store/action-bar/action-bar.state';
 import { pokemonShellEffects } from './store/pokemon/pokemon.effects';
 import { pokemonShellEntityReducer } from './store/pokemon/pokemon.reducer';
-import { POKEMON_SHELL_STORE_KEY } from './store/pokemon/pokemon.state';
+import { FAVORITE_POKEMON_SHELL_STORE_KEY, POKEMON_SHELL_STORE_KEY } from './store/pokemon/pokemon.state';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AllPokemonListComponent } from './all/list/pokemon-list.component';
 import { POKEMON_DETAIL_STORE_KEY } from './store/pokemon-detail/pokemon-detail.state';
@@ -21,9 +21,11 @@ import { pokemonDetailEffects } from './store/pokemon-detail/pokemon-detail.effe
 import { PokemonDetailComponent } from './all/list/detail/pokemon-detail.component';
 import { PokemonModule } from '../shared/pokemon.module';
 import { PokemonFlavorTextComponent } from './all/list/detail/flavor-text/flavor-text.component';
+import { favoritePokemonShellEntityReducer } from './store/pokemon/pokemon-favorite.reducer';
 
 @NgModule({
   imports: [
+    StoreModule.forFeature(FAVORITE_POKEMON_SHELL_STORE_KEY, favoritePokemonShellEntityReducer),
     StoreModule.forFeature(POKEMON_SHELL_STORE_KEY, pokemonShellEntityReducer),
     EffectsModule.forFeature(pokemonShellEffects),
     StoreModule.forFeature(ACTION_BAR_STORE_KEY, actionbarEntityReducer),

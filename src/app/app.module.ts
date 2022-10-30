@@ -24,7 +24,10 @@ import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { ROUTER_STATE } from './store/router/router.state';
 import { MAT_RIPPLE_GLOBAL_OPTIONS, RippleGlobalOptions } from '@angular/material/core';
-
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireModule } from '@angular/fire/compat';
 
 const icons: IconDefinition[] = [ AppstoreOutline, ProjectFill, ContainerFill,
   ProjectOutline, ContainerOutline ];
@@ -69,6 +72,9 @@ const globalRippleConfig: RippleGlobalOptions = {
       stateKey: ROUTER_STATE,
       routerState: RouterState.Minimal
     }),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [
     {

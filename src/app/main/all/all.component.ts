@@ -13,7 +13,7 @@ import { ScrollPosition } from '../store/pokemon/pokemon.state';
 export class AllPokemonComponent implements OnInit {
 
   compId: string = 'pokemonList';
-  title: string = "Pokemon Directory";
+  title: string = "Directory";
   scrollPosition = ScrollPosition;
   actionBtns: MenuOption[] = [];
   showPageData: boolean = false;

@@ -6,24 +6,32 @@
   [infiniteScrollContainer]="'.content-parent'"
   [fromRoot]="true"
   [infiniteScrollDisabled]="scrollDisabled"
-  class="poke-list">
+  class="poke-list" fxLayout="column" fxLayoutAlign="start center">
     <ng-container *ngIf="(list && (list.length > 0)); else noItems">
 
-      <mat-nav-list dense>
-        <ng-container *ngFor="let pokemon of list">
-          <a matLine [routerLink]="['../', pokemon.name]"
-            [ngClass]="{'poke-list-item':true, 'last-selected': ((this.ps.selectedPokemon$ | async)?.name) === pokemon.name}">
-            <mat-list-item>
-              <div class="logo mr-2">
-                <img [src]="'assets/img/pokeball.png'" />
-              </div>
-              <div [id]="pokemon.name">
-              {{ pokemon.pokemonId }} - {{ pokemon.name }}
-              </div>
-            </mat-list-item>
-          </a>
+      <mat-list dense>
+        <ng-container *ngFor="let pokemon of list; trackBy: trackByFn">
+          <mat-list-item [ngClass]="{'last-selected': ((this.ps.selectedPokemon$ | async)?.name) === pokemon.name,'poke-list-item':true}">
+            <div [ngClass]="{'w-100':true}"
+              fxLayout="row" fxLayoutAlign="space-between center">
+              
+              <a fxLayout="row" fxLayoutAlign="center center" [routerLink]="['../', pokemon.name]">
+                <div class="logo mr-2 d-flex">
+                  <img [src]="'assets/img/pokeball.png'" />
+                </div>
+                <div [id]="pokemon.name" class="fs-14">
+                  {{ pokemon.pokemonId }} - {{ pokemon.name | titlecase }}
+                </div>
+              </a>
+
+              <button mat-icon-button (click)="onFavToggle(pokemon)">
+                <mat-icon [ngClass]="{'favorite': true, 'favorited': pokemon.isFavorite}">favorite</mat-icon>
+              </button>
+            </div>
+            
+          </mat-list-item>
         </ng-container>
-      </mat-nav-list>
+      </mat-list>
 
       <ng-container *ngIf="(this.ps.pokemonListLoading$ | async)">
         <app-shared-loading [message]="'Pokemons'"></app-shared-loading>

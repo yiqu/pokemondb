@@ -1,9 +1,8 @@
 import { EntityState, createEntityAdapter, Update } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
-import { PokemonShell } from 'src/app/shared/models/pokmeon.model';
+import { PokemonShell, PokemonShellFavorite } from 'src/app/shared/models/pokmeon.model';
 import { calculateParams, ITEMS_PER_PAGE, Pagination } from 'src/app/shared/models/rest.model';
 import * as fromPokemonShellActions from './pokemon.actions';
-
 
 export interface PokemonShellEntityState extends EntityState<PokemonShell> {
   apiWorking: boolean;
@@ -82,7 +81,25 @@ export const pokemonShellEntityReducer = createReducer(
       errMsg,
       error: true
     };
+  }),
+
+  on(fromPokemonShellActions.getPokemonFavoriteSuccess, (state, { payload }) => {
+    console.log(payload)
+    let updates: Update<PokemonShell>[] = [];
+    payload.forEach((fav: PokemonShellFavorite) => {
+      updates.push({
+        id: fav.name,
+        changes: {
+          isFavorite: true
+        }
+      });
+    });
+    return adapter.updateMany(updates, {
+      ...state
+    })
   })
+
+  
 
 )
 

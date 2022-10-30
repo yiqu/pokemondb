@@ -1,12 +1,11 @@
 import { createAction, props } from "@ngrx/store";
-import { Pokemon, PokemonResponse, PokemonShell, PokemonSpecies } from "src/app/shared/models/pokmeon.model";
+import { Pokemon, PokemonResponse, PokemonShell, PokemonShellFavorite, PokemonSpecies } from "src/app/shared/models/pokmeon.model";
 import { Pagination } from "src/app/shared/models/rest.model";
 import { ScrollPosition } from "./pokemon.state";
 
 const GET_ALL_POKEMON_START: string = '[Pokemon All/API] Get all pokemon start';
 const GET_ALL_POKEMON_SUCCESS: string = '[Pokemon All/API] Get all pokemon successful';
 const GET_ALL_POKEMON_FAILURE: string = '[Pokemon All/API] Get all pokemon failure';
-
 
 const GET_POKEMON_RESET: string = '[Pokemon/UI] Reset pokemon detail prop';
 const GET_POKEMON_START: string = '[Pokemon/API] Get a pokemon start';
@@ -16,6 +15,14 @@ const GET_POKEMON_FAILURE: string = '[Pokemon/API] Get a pokemon failure';
 const GET_POKEMON_SPECIES_START: string = '[Pokemon/API] Get a pokemon species start';
 const GET_POKEMON_SPECIES_SUCCESS: string = '[Pokemon/API] Get a pokemon species successful';
 const GET_POKEMON_SPECIES_FAILURE: string = '[Pokemon/API] Get a pokemon species failure';
+
+const POKEMON_FAVORITE_START: string = '[Pokemon/API] Set pokemon as favorite start';
+const POKEMON_FAVORITE_SUCCESS: string = '[Pokemon/API] Set pokemon as favorite successful';
+const POKEMON_FAVORITE_FAILURE: string = '[Pokemon/API] Set pokemon as favorite failure';
+
+const GET_POKEMON_FAVORITE_START: string = '[Pokemon/API] Get pokemon favorites start';
+const GET_POKEMON_FAVORITE_SUCCESS: string = '[Pokemon/API] Get pokemon favorites successful';
+const GET_POKEMON_FAVORITE_FAILURE: string = '[Pokemon/API] Get pokemon favorites failure';
 
 export const getAllPokemonStart = createAction(
   GET_ALL_POKEMON_START,
@@ -66,3 +73,31 @@ export const getPokemonSpeciesFailure = createAction(
   props<{errMsg: string}>()
 )
 
+export const pokemonFavoriteStart = createAction(
+  POKEMON_FAVORITE_START,
+  props<{pokemon: PokemonShell}>()
+)
+
+export const pokemonFavoriteSuccess = createAction(
+  POKEMON_FAVORITE_SUCCESS,
+  props<{payload: any, fetchedDate?: number}>()
+)
+
+export const pokemonFavoriteFailure = createAction(
+  POKEMON_FAVORITE_FAILURE,
+  props<{errMsg: string}>()
+)
+
+export const getPokemonFavoriteStart = createAction(
+  GET_POKEMON_FAVORITE_START
+)
+
+export const getPokemonFavoriteSuccess = createAction(
+  GET_POKEMON_FAVORITE_SUCCESS,
+  props<{payload: PokemonShellFavorite[], fetchedDate?: number}>()
+)
+
+export const getPokemonFavoriteFailure = createAction(
+  GET_POKEMON_FAVORITE_FAILURE,
+  props<{errMsg: string}>()
+)

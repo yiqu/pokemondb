@@ -21,6 +21,15 @@ export interface PokemonShell {
   name: string;
   url: string;
   pokemonId?: string;
+  isFavorite?: boolean;
+}
+
+export interface PokemonShellFavorite {
+  name: string;
+  url: string;
+  pokemonId?: string;
+  id?: string;
+  dateFavorited: number;
 }
 
 export interface Pokemon {

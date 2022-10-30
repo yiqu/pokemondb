@@ -4,30 +4,49 @@
 
 .poke-list {
 
-  .poke-list-item.last-selected {
-    .mat-list-item {
-      background-color: #eeeff9;
-    }
-
+  .mat-list-item.poke-list-item.last-selected {
+    background-color: #eeeff9;
   }
 
   .mat-list-item {
-    height: 35px;
+    // height: 35px;
+    width: 20rem;
 
     .logo {
+      margin-bottom: 1px;
       img {
-        height: 15px;
+        height: 23px;
       }
+    }
+
+    button .mat-icon.favorite {
+      color: #f9eaea;
+      cursor: pointer;
+    }
+
+    button .mat-icon.favorite:hover {
+      color: #b14d4d;
+    }
+
+    button .mat-icon.favorited {
+      color: #b14d4d;
+      cursor: pointer;
+    }
+
+    a {
+      color: rgba(0,0,0,.87);
+      height: 39px;
+    }
+
+    a:hover {
+      color: #007bff;
+      text-decoration: none;
     }
   }
 
   .mat-list-item:hover {
-    background-color: transparent;
-    font-weight: 700;
+    background-color: #eeeff9;
+    // font-weight: 700;
   }
 
-  .mat-list-single-selected-option {
-    background-color: #e4e6f9;
-    font-weight: 500;
-  }
 }

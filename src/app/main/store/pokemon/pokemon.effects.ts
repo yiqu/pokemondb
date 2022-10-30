@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { OnInitEffects } from "@ngrx/effects";
 import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
-import { map, switchMap, iif, of, mergeMap, EMPTY, distinctUntilChanged, catchError, filter, tap } from 'rxjs';
+import { map, switchMap, iif, of, mergeMap, EMPTY, distinctUntilChanged, catchError, filter, tap, delay } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { PokemonShellService } from '../../pokemon-shell.service';
 import * as fromPokemonShellActions from './pokemon.actions';
 import { Pagination } from 'src/app/shared/models/rest.model';
-import { PokemonResponse, PokemonShell } from 'src/app/shared/models/pokmeon.model';
+import { PokemonResponse, PokemonShell, PokemonShellFavorite } from 'src/app/shared/models/pokmeon.model';
 import { ScrollPosition } from './pokemon.state';
 import { RouterService } from 'src/app/shared/services/router-service';
 import { ROUTER_NAVIGATION } from '@ngrx/router-store';
@@ -52,6 +52,7 @@ export class PokemonShellEffects implements OnInitEffects {
         let requestPage = actionPayload.page ?? 0;
 
         return this.ps.getPokemonShells(requestPage, fetchUrl).pipe(
+          delay(0),
           map((payload: PokemonResponse<PokemonShell>) => {
             const dataWithIdAdded = payload.results.map((poke: PokemonShell) => {
               const pokeUrl = poke.url;
@@ -67,6 +68,50 @@ export class PokemonShellEffects implements OnInitEffects {
               results: dataWithIdAdded
             }
             return fromPokemonShellActions.getAllPokemonSuccess({ payload: resultData, fetchedDate: new Date().getTime() });
+          }),
+          catchError((err) => {
+            return of(fromPokemonShellActions.getAllPokemonFailure({ errMsg: err }));
+          }),
+        )
+      })
+    );
+  });
+
+  dispatchGetFavoritePokemonShells$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(...[fromPokemonShellActions.getAllPokemonSuccess, fromPokemonShellActions.pokemonFavoriteSuccess]),
+      map(() => {
+        return fromPokemonShellActions.getPokemonFavoriteStart();
+      })
+    );
+  });
+
+  setPokemonShellAsFavorite$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(fromPokemonShellActions.pokemonFavoriteStart),
+      mergeMap((res) => {
+        const pokemon = res.pokemon;
+        return this.ps.setPokemonFavorite(pokemon).operationObs.then(
+          (res) => {
+            return fromPokemonShellActions.pokemonFavoriteSuccess({ payload: res, fetchedDate: new Date().getTime() });
+          }
+        ).catch((err) => {
+          return fromPokemonShellActions.pokemonFavoriteFailure({ errMsg: err });
+        })
+      })
+    );
+  });
+
+  getFavoritePokemonShells$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(fromPokemonShellActions.getPokemonFavoriteStart),
+      switchMap((res) => {
+        return this.ps.getPokemonFavorites().pipe(
+          map((pokemons: PokemonShellFavorite[]) => {
+            return fromPokemonShellActions.getPokemonFavoriteSuccess({ payload: pokemons });
+          }),
+          catchError((err) => {
+            return of(fromPokemonShellActions.getPokemonFavoriteFailure({ errMsg : err }));
           })
         )
       })
