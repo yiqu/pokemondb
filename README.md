@@ -9,4 +9,4 @@
 A Pokemon database.
 
 ### Dev
-[DEMO](https://yiqu.github.io/pokemondb/all/list)
+[DEMO](https://yiqu.github.io/pokemondb)
